@@ -4,27 +4,22 @@
   >
     <DeleteCartItemButton :id="item.id" />
     <div class="flex gap-[20px]">
-      <CartItemImage :url="item.imageUrl" />
+      <CartItemImage :url="item.imageURL" />
       <CartItemDescription :title="item.title" :author="item.author" />
     </div>
-    <CartItemOptions
-      :id="item.id"
-      :price="item.price"
-      :currency="item.currency"
-      :amount="item.amount"
-    />
+    <CartItemOptions :book="item" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { CartItem } from './cart'
+import type { Book } from '@/components/scripts/catalogue'
+import CartItemOptions from './CartItemOptions.vue'
 import CartItemDescription from './CartItemDescription.vue'
 import CartItemImage from './CartItemImage.vue'
-import CartItemOptions from './CartItemOptions.vue'
 import DeleteCartItemButton from './DeleteCartItemButton.vue'
 
 defineProps<{
-  item: CartItem
+  item: Book
 }>()
 </script>
 

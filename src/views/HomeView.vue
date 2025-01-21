@@ -3,6 +3,7 @@
     <HomeBanner />
     <HomeDescription />
     <HomeCatalogue />
+    <LoginForm />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import HomeCatalogue from '@/components/home_page/catalogue/HomeCatalogue.vue'
 import HomeBanner from '@/components/home_page/home_banner/HomeBanner.vue'
 import HomeDescription from '@/components/home_page/home_description/HomeDescription.vue'
+import LoginForm from '@/components/home_page/login_form/LoginForm.vue'
 </script>
 
 <style scoped></style>

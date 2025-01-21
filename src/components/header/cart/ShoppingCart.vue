@@ -8,7 +8,7 @@
         <span class="text-3xl font-bold">Your order:</span>
         <CloseCartButton />
       </div>
-      <CartList v-if="user.cart.length" />
+      <CartList :items="page.cart" v-if="page.cart.length" />
       <EmptyCart v-else />
     </div>
   </div>
@@ -16,13 +16,11 @@
 
 <script setup lang="ts">
 import { usePageStore } from '@/stores/pageStore'
-import CloseCartButton from './CloseCartButton.vue'
-import CartList from './CartList.vue'
-import { useUserStorage } from '@/stores/userStore'
 import EmptyCart from './EmptyCart.vue'
+import CartList from './CartList.vue'
+import CloseCartButton from './CloseCartButton.vue'
 
 const page = usePageStore()
-const user = useUserStorage()
 </script>
 
 <style scoped></style>

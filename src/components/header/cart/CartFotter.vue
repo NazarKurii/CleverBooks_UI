@@ -16,19 +16,20 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { CartItem } from './cart'
+
 import MakeOrderButton from './MakeOrderButton.vue'
+import type { Book } from '@/components/scripts/catalogue'
 
 const props = defineProps<{
-  items: CartItem[]
+  items: Book[]
 }>()
 
 const totalPrice = computed(() => {
   let totalPrice = 0
   props.items.forEach((item) => {
-    totalPrice += item.price * item.amount
+    totalPrice += item.price * item.cart
   })
-  return totalPrice
+  return totalPrice.toFixed(2)
 })
 </script>
 

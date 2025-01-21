@@ -1,23 +1,26 @@
 <template>
   <div
     :class="{
-      'w-[150px]': cart > 0,
+      'w-[150px]': book?.cart,
     }"
     class="flex justify-between"
   >
-    <RemoveFromCartButton :is-cart-empty="cart == 0" />
-    <span v-if="cart > 0" class="text-2xl my-auto font-semibold">{{ cart }}</span>
-    <AddToCartButton :small="cart != 0" />
+    <RemoveFromCartButton />
+    <span v-if="book ? book.cart > 0 : false" class="text-2xl my-auto font-semibold">{{
+      book?.cart
+    }}</span>
+    <AddToCartButton />
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Book } from '@/components/scripts/catalogue'
 import AddToCartButton from './AddToCartButton.vue'
 import RemoveFromCartButton from './RemoveFromCartButton.vue'
 
-defineProps<{
-  cart: number
-}>()
+import { inject } from 'vue'
+
+const book = inject<Book>('book')
 </script>
 
 <style scoped></style>

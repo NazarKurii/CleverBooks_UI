@@ -1,11 +1,10 @@
 <template>
   <button
-    v-if="!isCartEmpty"
+    v-if="book?.cart"
     @click="
       () => {
-        removeFromCart && id ? removeFromCart(id) : false
-        if (id != undefined) {
-          user.removeFromCart(id)
+        if (book) {
+          page.removeFromCart(book.id)
         }
       }
     "
@@ -16,17 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStorage } from '@/stores/userStore'
+import type { Book } from '@/components/scripts/catalogue'
+import { usePageStore } from '@/stores/pageStore'
 import { inject } from 'vue'
 
-defineProps<{
-  isCartEmpty: boolean
-}>()
-
-const removeFromCart = inject<(id: number) => void>('removeFromCart')
-const id = inject<number>('id')
-
-const user = useUserStorage()
+const book = inject<Book>('book')
+const page = usePageStore()
 </script>
 
 <style scoped></style>

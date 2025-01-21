@@ -1,26 +1,30 @@
 <template>
-  <button v-if="!cart" class="flex size-[50px] active:scale-90 transition-all duration-200">
+  <button v-if="!book?.cart" class="flex size-[50px] active:scale-90 transition-all duration-200">
     <img
       @click="
         () => {
-          if (favoriteSwitcher && id != undefined) {
-            favoriteSwitcher(id)
+          if (!page.userRegistered) {
+            page.togleLoginForm()
+          } else if (book) {
+            page.togleFavorite(book)
           }
         }
       "
-      v-if="!favorite"
+      v-if="!book?.favorite"
       src="/public/like-1.svg"
       alt=""
     />
     <img
       @click="
         () => {
-          if (favoriteSwitcher && id != undefined) {
-            favoriteSwitcher(id)
+          if (!page.userRegistered) {
+            page.togleLoginForm()
+          } else if (book) {
+            page.togleFavorite(book)
           }
         }
       "
-      v-if="favorite"
+      v-if="book?.favorite"
       src="/public/like-2.svg"
       alt=""
     />
@@ -28,18 +32,12 @@
 </template>
 
 <script setup lang="ts">
+import { type Book } from '@/components/scripts/catalogue'
 import { usePageStore } from '@/stores/pageStore'
-import { computed, inject } from 'vue'
+import { inject } from 'vue'
+const book = inject<Book>('book')
 
-defineProps<{
-  cart: number
-}>()
 const page = usePageStore()
-
-const favoriteSwitcher = inject<(id: number) => void>('favoriteSwitcher')
-const id = inject<number>('id')
-
-const favorite = computed(() => page.favorites.findIndex((favoriteID) => favoriteID == id) != -1)
 </script>
 
 <style scoped></style>

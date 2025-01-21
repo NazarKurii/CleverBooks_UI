@@ -22,13 +22,3 @@ window.addEventListener('scroll', () => {
   currentScroll = window.scrollY
   ActivateTransition()
 })
-
-export interface CartItem {
-  id: number
-  amount: number
-  price: number
-  title: string
-  author: string
-  currency: string
-  imageUrl: string
-}

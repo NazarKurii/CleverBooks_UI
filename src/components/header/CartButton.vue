@@ -15,8 +15,8 @@
 
 <script setup lang="ts">
 import { usePageStore } from '@/stores/pageStore'
-import { isFixed } from './cart'
-import { transtion } from './cart'
+import { isFixed } from '../scripts/cart'
+import { transtion } from '../scripts/cart'
 
 const page = usePageStore()
 </script>

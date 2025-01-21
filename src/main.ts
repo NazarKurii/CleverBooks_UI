@@ -5,16 +5,23 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
-import { useUserStorage } from './stores/userStore'
+import { usePageStore } from './stores/pageStore'
+import { initUser } from './components/scripts/page'
 
-const app = createApp(App)
-const pinia = createPinia()
+async function initApp() {
+  const app = createApp(App)
+  const pinia = createPinia()
 
-app.use(pinia)
-app.use(router)
+  app.use(pinia)
+  app.use(router)
 
-axios.defaults.baseURL = 'http://localhost:8080'
+  axios.defaults.baseURL = 'http://localhost:8080'
+  await initUser()
+  const page = usePageStore()
+  axios.defaults.headers.common.Authorization = page.token
+  await page.init()
 
-axios.defaults.headers.common.Authorization = useUserStorage().token
+  app.mount('#app')
+}
 
-app.mount('#app')
+initApp()

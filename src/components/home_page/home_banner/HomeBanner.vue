@@ -1,5 +1,5 @@
 <template>
-  <img src="/public/banner.webp" class="rounded-3xl shadow-lg" alt="" />
+  <img src="/public/poster.jpg" class="rounded-3xl shadow-lg" alt="" />
 </template>
 
 <script setup lang="ts"></script>

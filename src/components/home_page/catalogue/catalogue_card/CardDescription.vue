@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl font-bold">{{ title }}</h1>
-    <h2 class="text-lg text-orange-600">{{ author }}</h2>
+    <h1 class="text-2xl font-bold w-full h-[33px] overflow-clip">{{ title }}</h1>
+    <h2 class="text-lg text-orange-600 h-[25px] overflow-clip">{{ author }}</h2>
   </div>
   <div class="flex h-1/4 gap-[10px]">
     <img v-if="accessebility.book" class="border rounded-xl" src="/public/book.jpg" alt="" />

@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="page.cartOpen"
-    @click="page.togleCart"
-    class="flex size-full bg-black z-20 opacity-40 absolute"
-  ></div>
+  <BackGround :condition="page.cartOpen" :action="page.togleCart" :z-index="20" />
   <div class="flex justify-center mb-[20px]">
     <NavBar />
   </div>
@@ -11,6 +7,7 @@
 
 <script setup lang="ts">
 import NavBar from '@/components/header/NavBar.vue'
+import BackGround from '@/components/home_page/BackGround.vue'
 import { usePageStore } from '@/stores/pageStore'
 
 const page = usePageStore()

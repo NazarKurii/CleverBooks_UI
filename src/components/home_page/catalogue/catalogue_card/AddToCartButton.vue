@@ -2,16 +2,15 @@
   <button
     @click="
       () => {
-        if (id && addToCart) {
-          addToCart(id)
-          user.addToCart(id)
+        if (book) {
+          page.addToCart(book)
         }
       }
     "
     :class="{
-      'w-[70px]': !small,
-      'w-[50px]': small,
-      'active:scale-90': small,
+      'w-[70px]': !book?.cart,
+      'w-[50px]': book?.cart,
+      'active:scale-90': book?.cart,
     }"
     class="flex bg-green-200 text-4xl text-green-500 transition-all hover:bg-green-500 hover:text-white duration-200 h-[50px] items-center pb-[2px] rounded-xl justify-center"
   >
@@ -20,17 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStorage } from '@/stores/userStore'
+import type { Book } from '@/components/scripts/catalogue'
+import { usePageStore } from '@/stores/pageStore'
+
 import { inject } from 'vue'
 
-defineProps<{
-  small: boolean
-}>()
-
-const addToCart = inject<(id: number) => void>('addToCart')
-const id = inject<number>('id')
-
-const user = useUserStorage()
+const book = inject<Book>('book')
+const page = usePageStore()
 </script>
 
 <style scoped></style>
