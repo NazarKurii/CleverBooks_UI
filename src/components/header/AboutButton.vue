@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <Span class="text-xl font-bold hover:text-orange-600 cursor-pointer">About</Span>
 </template>
 
 <script setup lang="ts"></script>

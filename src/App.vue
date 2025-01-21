@@ -1,11 +1,7 @@
 <template>
-  <div class="flex bg-gray-100 flex-col relative">
-    <div class="h-[140px] w-full">
-      <HeaderVue />
-    </div>
-
+  <div class="app">
+    <HeaderVue />
     <router-view></router-view>
-
     <FooterView />
   </div>
 </template>

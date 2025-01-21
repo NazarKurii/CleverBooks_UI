@@ -5,7 +5,7 @@
     :style="{
       zIndex: zIndex,
     }"
-    class="flex size-full bg-black opacity-40 absolute"
+    class="flex size-full inset-0 bg-black opacity-40 absolute"
   ></div>
 </template>
 

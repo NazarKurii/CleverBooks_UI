@@ -1,16 +1,27 @@
 <template>
-  <BackGround :condition="page.cartOpen" :action="page.togleCart" :z-index="20" />
-  <div class="flex justify-center mb-[20px]">
+  <div class="header-container">
     <NavBar />
+    <ShoppingCart />
   </div>
+  <LoginForm />
 </template>
 
 <script setup lang="ts">
+import ShoppingCart from '@/components/header/cart/ShoppingCart.vue'
 import NavBar from '@/components/header/NavBar.vue'
-import BackGround from '@/components/home_page/BackGround.vue'
-import { usePageStore } from '@/stores/pageStore'
-
-const page = usePageStore()
+import LoginForm from '@/components/home_page/login_form/LoginForm.vue'
 </script>
 
-<style scoped></style>
+<style scoped>
+.header-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  max-width: 1600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
