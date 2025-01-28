@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-export const isFixed = ref(false)
+export const isFixed = ref(true)
 
 let currentScroll: number = window.scrollY
 window.addEventListener('scroll', () => {

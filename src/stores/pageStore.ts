@@ -1,6 +1,8 @@
 import type { Book } from '@/components/scripts/catalogue'
 import { updateCatalogue } from '@/components/scripts/page'
+import { initUser } from '@/components/scripts/user'
 import { findInedxById, handleError } from '@/components/scripts/utils'
+import router from '@/router'
 import axios from 'axios'
 import { defineStore } from 'pinia'
 
@@ -8,7 +10,6 @@ export const usePageStore = defineStore('page', {
   state: () => {
     return {
       userRegistered: false,
-      token: '',
       logInformOpen: false,
       cartOpen: false,
       catalogue: [] as {
@@ -21,7 +22,9 @@ export const usePageStore = defineStore('page', {
   },
 
   actions: {
-    async init() {
+    async init(registered: boolean = false) {
+      this.userRegistered = registered
+
       try {
         const { data }: { data: { cart: Book[] } } = await axios.get('/cart')
 
@@ -40,6 +43,24 @@ export const usePageStore = defineStore('page', {
         }
       } catch (err: unknown) {
         handleError(err)
+      }
+
+      await this.getHomeCatalogues()
+    },
+
+    togleFavorites() {
+      if (!this.userRegistered) {
+        this.togleLoginForm()
+      } else {
+        router.push({ name: 'favorites' })
+      }
+    },
+
+    togleProfile() {
+      if (!this.userRegistered) {
+        this.togleLoginForm()
+      } else {
+        router.push({ name: 'account' })
       }
     },
 
@@ -129,6 +150,7 @@ export const usePageStore = defineStore('page', {
         handleError(err)
       }
     },
+
     async togleFavorite(book: Book) {
       book.favorite = !book.favorite
       updateCatalogue(book)
@@ -167,6 +189,14 @@ export const usePageStore = defineStore('page', {
         handleError(err)
         return []
       }
+    },
+
+    async singOut() {
+      this.userRegistered = false
+      localStorage.removeItem('token')
+      await initUser()
+
+      router.push({ name: 'home' })
     },
   },
 })

@@ -1,23 +1,29 @@
 <template>
   <BackGround :action="page.togleCart" :condition="page.cartOpen" :z-index="100" />
-  <div
-    :class="{
-      'fixed-header': isFixed,
-    }"
-    :style="{
-      width: `${resolution.width < 1600 ? resolution.width - 20 : 1580}px`,
-    }"
-    class="header"
-  >
-    <NavBarLogo />
 
-    <div class="menue-container">
-      <FavoritesButton />
-      <ProfileButton />
-      <div class="cart-button-container">
-        <CartButton />
+  <div class="flex relative w-full h-full justify-end">
+    <div
+      :class="{
+        'fixed-header': isFixed,
+        'relative-header': !isFixed,
+      }"
+      :style="{
+        width: `${resolution.width < 1600 ? resolution.width - 20 : 1580}px`,
+      }"
+      class="header"
+    >
+      <NavBarLogo />
+
+      <div class="menue-container">
+        <FavoritesButton />
+        <ProfileButton />
+        <div class="cart-button-container">
+          <!-- <CartButton /> -->
+        </div>
+        <MenueButton />
       </div>
     </div>
+    <CartButton />
   </div>
 </template>
 
@@ -31,6 +37,7 @@ import ProfileButton from './ProfileButton.vue'
 import { isFixed } from './navBar'
 import BackGround from '../home_page/BackGround.vue'
 import { useResolutionStore } from '@/stores/resolutionStore'
+import MenueButton from './MenueButton.vue'
 
 const page = usePageStore()
 const resolution = useResolutionStore()
@@ -38,7 +45,7 @@ const resolution = useResolutionStore()
 
 <style scoped>
 .fixed-header {
-  position: fixed;
+  animation: header 0.25s ease-out forwards;
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
@@ -49,7 +56,13 @@ const resolution = useResolutionStore()
   }
 }
 
+.relative-header {
+  animation: headerRelative 0.25s ease-in forwards;
+}
+
 .header {
+  position: fixed;
+
   display: flex;
   z-index: 50;
   align-items: center;
@@ -63,6 +76,7 @@ const resolution = useResolutionStore()
   padding-right: 20px;
   background-color: white;
   z-index: 110;
+  transition: all 0.3s ease;
 }
 
 .menue-container {
@@ -71,12 +85,30 @@ const resolution = useResolutionStore()
 }
 
 .cart-button-container {
-  width: 170px;
+  width: 173px;
 }
 
 @media (max-width: 850px) {
   .cart-button-container {
     width: 50px;
+  }
+}
+
+@keyframes header {
+  from {
+    transform: translateY(-200px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes headerRelative {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-200px);
   }
 }
 </style>

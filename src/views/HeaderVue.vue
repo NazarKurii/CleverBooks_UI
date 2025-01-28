@@ -23,5 +23,7 @@ import LoginForm from '@/components/home_page/login_form/LoginForm.vue'
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+
+  z-index: 20;
 }
 </style>

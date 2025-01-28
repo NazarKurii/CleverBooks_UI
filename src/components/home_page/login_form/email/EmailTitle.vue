@@ -4,7 +4,7 @@
       >Log into your <br />
       profile</span
     >
-    <span class="text-xl text-gray-500 mx-auto">Enter your phone number</span>
+    <span class="text-xl text-gray-500 mx-auto">Enter your email</span>
   </div>
 </template>
 

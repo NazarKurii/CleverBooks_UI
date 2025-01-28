@@ -9,4 +9,7 @@
   background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
   flex-direction: column;
   position: relative;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: space-between;
 }
