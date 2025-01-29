@@ -24,31 +24,4 @@ export class BookSection {
     this.books = books
     this.genre = genre
   }
-
-  favoriteSwitcher(
-    id: number,
-    pageUpdateFunc: (id: number) => void,
-    serverUpdateFunction: (id: number) => void,
-  ) {
-    pageUpdateFunc(id)
-    serverUpdateFunction(id)
-  }
-
-  addToCart(
-    id: number,
-    pageUpdateFunc: (id: number) => void,
-    serverUpdateFunction: (id: number) => void,
-  ) {
-    pageUpdateFunc(id)
-    serverUpdateFunction(id)
-  }
-
-  removeFromCart(
-    id: number,
-    pageUpdateFunc: (id: number) => void,
-    serverUpdateFunction: (id: number) => void,
-  ) {
-    pageUpdateFunc(id)
-    serverUpdateFunction(id)
-  }
 }

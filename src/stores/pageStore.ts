@@ -16,7 +16,7 @@ export const usePageStore = defineStore('page', {
         genre: string
         books: Book[]
       }[],
-      favorites: [] as Book[],
+
       cart: [] as Book[],
     }
   },
@@ -24,22 +24,14 @@ export const usePageStore = defineStore('page', {
   actions: {
     async init(registered: boolean = false) {
       this.userRegistered = registered
+      this.cart = []
+      this.catalogue = []
 
       try {
         const { data }: { data: { cart: Book[] } } = await axios.get('/cart')
 
         if (data.cart) {
           this.cart = data.cart
-        }
-      } catch (err: unknown) {
-        handleError(err)
-      }
-
-      try {
-        const { data }: { data: { favorites: Book[] } } = await axios.get('/favorite')
-
-        if (data.favorites) {
-          this.favorites = data.favorites
         }
       } catch (err: unknown) {
         handleError(err)
@@ -60,7 +52,7 @@ export const usePageStore = defineStore('page', {
       if (!this.userRegistered) {
         this.togleLoginForm()
       } else {
-        router.push({ name: 'account' })
+        router.push({ name: 'orderHistory' })
       }
     },
 
@@ -82,13 +74,30 @@ export const usePageStore = defineStore('page', {
             sections: Record<string, Book[]>
           }
         } = await axios.get('/homeCatalogues')
-
+        this.catalogue = []
         for (const key in data.sections) {
           this.catalogue.push({
             genre: key,
             books: data.sections[key],
           })
         }
+      } catch (err: unknown) {
+        handleError(err)
+      }
+    },
+
+    async getFavoritesCatalogue() {
+      try {
+        const {
+          data,
+        }: {
+          data: {
+            books: Book[]
+          }
+        } = await axios.get('/favorite')
+
+        this.catalogue = []
+        this.catalogue.push({ genre: 'favorites', books: data.books })
       } catch (err: unknown) {
         handleError(err)
       }
@@ -159,6 +168,13 @@ export const usePageStore = defineStore('page', {
         if (book.favorite) {
           await axios.post('/favorite', { bookId: book.id })
         } else {
+          if (this.catalogue[0].genre == 'favorites') {
+            const index = findInedxById(this.catalogue[0].books, book.id)
+
+            if (index != -1) {
+              this.catalogue[0].books.splice(index, 1)
+            }
+          }
           await axios.delete('/favorite', {
             params: {
               bookId: book.id,
@@ -191,8 +207,7 @@ export const usePageStore = defineStore('page', {
       }
     },
 
-    async singOut() {
-      this.userRegistered = false
+    async logout() {
       localStorage.removeItem('token')
       await initUser()
 

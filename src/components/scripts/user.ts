@@ -37,3 +37,32 @@ export async function initUser(token: string | null = '') {
     localStorage.setItem('token', token)
   }
 }
+
+export async function getUsersInfo(): Promise<User> {
+  try {
+    const { data }: { data: { user: User } } = await axios.post('userInfo')
+    return data.user
+  } catch (err: unknown) {
+    handleError(err)
+    return {
+      name: 'error',
+      surname: 'error',
+      number: 'error',
+      email: 'error',
+    }
+  }
+}
+
+export interface User {
+  name: string
+  surname: string
+  number: string
+  email: string
+}
+
+export const nullUser = {
+  name: '',
+  surname: '',
+  number: '',
+  email: '',
+}

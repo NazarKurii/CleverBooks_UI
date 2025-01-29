@@ -22,6 +22,7 @@
         </div>
         <MenueButton />
       </div>
+      <GoBackButton />
     </div>
     <CartButton />
   </div>
@@ -38,6 +39,7 @@ import { isFixed } from './navBar'
 import BackGround from '../home_page/BackGround.vue'
 import { useResolutionStore } from '@/stores/resolutionStore'
 import MenueButton from './MenueButton.vue'
+import GoBackButton from './GoBackButton.vue'
 
 const page = usePageStore()
 const resolution = useResolutionStore()
@@ -96,7 +98,7 @@ const resolution = useResolutionStore()
 
 @keyframes header {
   from {
-    transform: translateY(-200px);
+    transform: translateY(-100px);
   }
   to {
     transform: translateY(0px);
@@ -108,7 +110,7 @@ const resolution = useResolutionStore()
     transform: translateY(0px);
   }
   to {
-    transform: translateY(-200px);
+    transform: translateY(-100px);
   }
 }
 </style>

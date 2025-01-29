@@ -3,17 +3,38 @@
     @click="page.togleCart"
     :class="{
       'fixed-cart-button': isFixed,
-      'border ': !isFixed,
+      'border ': !isFixed && !page.cartOpen,
       'transition-cart-button': transtion,
+      'bg-white hover:bg-gray-200': !page.cartOpen,
+      'bg-orange-500 hover:bg-orange-600': page.cartOpen,
     }"
     class="cart-button-container"
   >
     <div class="cart-button">
-      <span v-if="resolution.width > 850" class="cart-button-text">Shopping cart</span>
-      <img src="/public/cart.svg" class="size-[30px]" alt="" />
+      <span
+        v-if="resolution.width > 850"
+        :class="{
+          'text-gray-500': !page.cartOpen,
+          'text-white': page.cartOpen,
+        }"
+        class="cart-button-text"
+        >Shopping cart</span
+      >
+      <img v-if="page.cartOpen" src="/public/whiteCart.png" class="size-[40px]" alt="" />
+      <img
+        v-if="!page.cartOpen"
+        src="/public/blackCart.png"
+        class="size-[40px] opacity-50"
+        alt=""
+      />
+
       <span
         v-if="cartItemsAmount"
-        class="absolute top-[-28px] right-[-28px] min-w-[34px] bg-orange-600 rounded-full py-[5px] px-[7px] flex justify-center items-center text-white font-extrabold"
+        :class="{
+          'border-2 border-white  min-w-[37px]': page.cartOpen,
+          ' min-w-[34px]': !page.cartOpen,
+        }"
+        class="absolute top-[-28px] right-[-28px] bg-orange-500 rounded-full py-[5px] px-[7px] flex justify-center items-center text-white font-extrabold"
         >{{ cartItemsAmount }}</span
       >
     </div>
@@ -61,10 +82,12 @@ const cartItemsAmount = computed(() => {
   top: 25px;
   display: flex;
   position: fixed;
-  background-color: white;
   border-radius: 14px;
   width: fit-content;
-  padding: 14px;
+  padding: px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
   cursor: pointer;
 }
@@ -88,9 +111,9 @@ const cartItemsAmount = computed(() => {
 
 .cart-button-text {
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+
   text-wrap: nowrap;
-  margin-top: 2px;
+  margin-top: 6px;
   font-weight: 600;
   font-size: 17px;
 }

@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import { type Book } from '@/components/scripts/catalogue'
+
 import { usePageStore } from '@/stores/pageStore'
 import { inject } from 'vue'
 const book = inject<Book>('book')

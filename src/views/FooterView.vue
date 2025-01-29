@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-[100px] z-10 bg-white w-full justify-center h-[300px] pt-[60px]">
+  <div class="flex gap-[100px] mt-[30px ] z-10 bg-white w-full justify-center h-[300px] pt-[60px]">
     <div class="flex flex-col gap-[20px]">
       <span class="text-5xl font-extrabold text-green-700">Clever Books</span>
       <span class="text-gray-500"> © Clever Books. All rights reserved. </span>
